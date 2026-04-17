@@ -762,3 +762,20 @@ def resend_welcome_email(request, student_id):
         logger.error("EMAIL_RESEND_FAILED | id=%s email=%s", student.student_id, student.email)
 
     return redirect('student_detail', student_id=student_id)
+    from django.shortcuts import render, redirect
+from .forms import RegisterForm
+from django.contrib.auth import login
+
+def register(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            user.set_password(user.password)
+            user.save()
+            login(request, user)
+            return redirect('/')
+    else:
+        form = RegisterForm()
+
+    return render(request, 'register.html', {'form': form})
