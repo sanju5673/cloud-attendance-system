@@ -12,11 +12,8 @@ urlpatterns = [
     path('api/v1/departments/', views.DepartmentListCreate.as_view(), name='api_departments'),
     path('api/v1/enrollments/', views.StudentSubjectListCreate.as_view(), name='api_enrollments'),
 
-    # ---- Legacy API (backwards compatibility) ----
-    path('v1/student/<slug:student_id>', views.StudentDetail.as_view()),
-    path('v1/student', views.StudentListCreate.as_view()),
-    path('v1/attendance/<int:pk>', views.AttendanceDetail.as_view()),
-    path('v1/attendance', views.AttendanceListCreate.as_view()),
+    # ---- 🔥 ADD THIS LINE (REGISTER) ----
+    path('register/', views.register, name='register'),
 
     # ---- Dashboard ----
     path('', views.dashboard, name='home'),
@@ -33,13 +30,6 @@ urlpatterns = [
     path('students/<slug:student_id>/delete/', views.student_delete, name='student_delete'),
     path('students/<slug:student_id>/resend-email/', views.resend_welcome_email, name='resend_welcome_email'),
 
-    # Legacy student URLs
-    path('student_insert', views.student_insert),
-    path('student_update', views.student_update),
-    path('student_viewsingle', views.student_viewsingle),
-    path('student_viewall', views.student_viewall),
-    path('student_delete', views.student_list),
-
     # ---- Attendance ----
     path('attendance/', views.attendance_list, name='attendance_list'),
     path('attendance/mark/', views.mark_attendance, name='mark_attendance'),
@@ -47,20 +37,10 @@ urlpatterns = [
     path('attendance/<int:pk>/edit/', views.attendance_edit, name='attendance_edit'),
     path('attendance/<int:pk>/delete/', views.attendance_delete_view, name='attendance_delete'),
 
-    # Legacy attendance URLs
-    path('attendance_insert', views.attendance_insert),
-    path('attendance_update', views.attendance_update),
-    path('attendance_viewall', views.attendance_viewall),
-    path('attendance_viewsingle', views.attendance_viewsingle),
-    path('attendance_delete', views.attendance_delete),
-
     # ---- Subjects ----
     path('subjects/', views.subject_list, name='subject_list'),
     path('subjects/add/', views.subject_create, name='subject_create'),
     path('subjects/<int:subject_code>/edit/', views.subject_edit, name='subject_edit'),
-
-    # Legacy subject URL
-    path('subjects_viewall', views.subjects_viewall),
 
     # ---- Departments ----
     path('departments/', views.department_list, name='department_list'),
@@ -70,7 +50,7 @@ urlpatterns = [
     # ---- Reports ----
     path('reports/', views.reports, name='reports'),
 
-    # ---- Personal / Student ----
+    # ---- Personal ----
     path('my-attendance/', views.student_dashboard, name='my_attendance'),
     path('viewPersonal', views.viewPersonal),
 ]
