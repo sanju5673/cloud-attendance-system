@@ -221,9 +221,6 @@ Cloud_Attendance_System/
 
 ### 1 — Clone and install dependencies
 
-```bash
-git clone https://github.com/kujalk/Cloud_Attendance_System.git
-cd Cloud_Attendance_System
 
 python -m venv venv
 source venv/bin/activate        # Windows: venv\Scripts\activate
@@ -276,27 +273,7 @@ print('Student group created.')
 python manage.py createsuperuser
 ```
 
-### 6 — (Optional) Load sample data
 
-```bash
-python manage.py shell -c "
-from api_v1.models import Department, Subject, Student
-
-dept, _ = Department.objects.get_or_create(name='Computer Science', code='CS')
-sub, _ = Subject.objects.get_or_create(title='Data Structures', defaults={'department': dept, 'credits': 3})
-
-s = Student.objects.create(
-    first_name='Jane', last_name='Doe',
-    email='janedoe@yopmail.com',   # use yopmail.com for instant throwaway inbox
-    mobile_no='0001234567',
-    department=dept, roll_number='CS-001'
-)
-print(f'Student login: username={s.student_id[:30]}, password=Student@{s.student_id[-4:]}')
-"
-```
-
-> **Tip:** Use [yopmail.com](https://yopmail.com) for disposable student email addresses during testing.
-> Set a student's email to `anything@yopmail.com`, then visit `https://yopmail.com`, enter the username, and read the inbox instantly — no sign-up needed.
 
 ### 7 — Run the development server
 
@@ -525,9 +502,6 @@ Admin/Staff users have full control over all data in the system.
    - Adds user to the `Student` group
    - Sends a welcome email with credentials
 
-> **Test emails:** Use [yopmail.com](https://yopmail.com) for student emails during testing.
-> Set a student's email to e.g. `jane.cs001@yopmail.com`, then go to `https://yopmail.com`,
-> enter `jane.cs001` in the inbox field, and read the welcome email — no registration, no spam filters.
 
 ### Marking Attendance
 
@@ -734,16 +708,7 @@ with connection.cursor() as c:
 "
 ```
 
-Expected: `Connected to: 8.0.mysql_aurora.3.07.x` (or similar Aurora version).
 
 ---
 
-## Developer
 
-**K. Janarthanan**
-- Blog: [scripting4ever.wordpress.com](https://scripting4ever.wordpress.com/2021/03/23/different-views-based-on-users-privileges-in-django-application/)
-- GitHub: [github.com/kujalk](https://github.com/kujalk)
-
----
-
-*Enhanced to Python 3.12 / Django 5.0 with Aurora Serverless v2, GitHub Actions CI/CD, bulk attendance marking, analytics dashboards, role-based portals, SMTP email notifications, and a complete UI overhaul.*
